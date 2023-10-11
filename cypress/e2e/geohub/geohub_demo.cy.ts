@@ -3,7 +3,7 @@ const forgotPasswordUrl = 'https://geohub.webmapp.it/password/reset';
 const blueColorRgb = 'rgb(64, 153, 222)';
 const whiteColorRgb = 'rgb(255, 255, 255)';
 
-before(() => {
+beforeEach(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
   cy.visit(geohubUrl);
@@ -37,6 +37,16 @@ describe('geohub demo tests', () => {
       .and('include.text', 'Login')
       .and('have.css', 'background-color', blueColorRgb)
       .and('have.css', 'color', whiteColorRgb);
+  });
+
+  it.skip('', () => {
+    cy.get('div button[type="submit"]').click();
+    cy.url().should('include', '/login');
+
+    cy.get('div input[type="email"]').type('asd');
+    cy.get('div button[type="submit"]').click();
+
+    cy.url().should('include', '/login');
   });
 });
 
