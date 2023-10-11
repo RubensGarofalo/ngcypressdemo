@@ -8,7 +8,7 @@ beforeEach(() => {
   cy.visit(orchestratorUrl);
 });
 
-describe('geohub login', () => {
+describe('geohub login fields', () => {
   it('should display all log in fields and style correctly', () => {
     //LOGO
     cy.get('span svg').should('exist');
@@ -95,6 +95,22 @@ describe('geohub reset password', () => {
       .and('include.text', 'Send Password Reset Link')
       .and('have.css', 'background-color', greenColorRgb);
   });
+});
+
+describe('geohub log in', () => {
+  it('should log in succesfly with correct fields', () => {
+    //EMAIL FIELD
+    cy.get('div input[type="email"]').type('rubensgiuseppegarofalo@gmail.com');
+    //PASSWORD FIELD
+    cy.get('div input[type="password"]').type('rubenswebmapp');
+    //LOGIN BUTTON
+    cy.get('div button[type="submit"]').click();
+    cy.url().should('include', 'dashboards/main');
+  });
+
+  //   it.skip('should display dashboards elements correctly', () => {
+  //     cy.get('header').should('exist');
+  //   });
 });
 
 after(() => {
