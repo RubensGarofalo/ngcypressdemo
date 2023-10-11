@@ -1,6 +1,8 @@
-const orchestratorUrl = 'https://orchestrator.maphub.it';
-const orchestratorForgotPasswordUrl = '/password/reset';
-const greenColorRgb = 'rgb(24, 182, 155)';
+const orchestratorUrl: string = 'https://orchestrator.maphub.it';
+const orchestratorForgotPasswordUrl: string = '/password/reset';
+const greenColorRgb: string = 'rgb(24, 182, 155)';
+const email: string = Cypress.env('email');
+const password: string = Cypress.env('password');
 
 beforeEach(() => {
   cy.clearCookies();
@@ -100,9 +102,9 @@ describe('geohub reset password', () => {
 describe('geohub log in', () => {
   it('should log in succesfly with correct fields', () => {
     //EMAIL FIELD
-    cy.get('div input[type="email"]').type('rubensgiuseppegarofalo@gmail.com');
+    cy.get('div input[type="email"]').type(email);
     //PASSWORD FIELD
-    cy.get('div input[type="password"]').type('rubenswebmapp');
+    cy.get('div input[type="password"]').type(password);
     //LOGIN BUTTON
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', 'dashboards/main');
