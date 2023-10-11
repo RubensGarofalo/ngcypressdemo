@@ -1,8 +1,10 @@
-const orchestratorUrl: string = 'https://orchestrator.maphub.it';
-const orchestratorForgotPasswordUrl: string = '/password/reset';
-const greenColorRgb: string = 'rgb(24, 182, 155)';
-const email: string = Cypress.env('email');
-const password: string = Cypress.env('password');
+import {
+  email,
+  greenColorRgb,
+  orchestratorForgotPasswordUrl,
+  orchestratorUrl,
+  password,
+} from 'cypress/utils/test-utils';
 
 beforeEach(() => {
   cy.clearCookies();
@@ -10,7 +12,7 @@ beforeEach(() => {
   cy.visit(orchestratorUrl);
 });
 
-describe('geohub login fields', () => {
+describe('orchestrator: login fields', () => {
   it('should display all log in fields and style correctly', () => {
     //LOGO
     cy.get('span svg').should('exist');
@@ -79,7 +81,7 @@ describe('geohub login fields', () => {
   });
 });
 
-describe('geohub reset password', () => {
+describe('orchestrator: reset password', () => {
   it('should display all reset password fields and style correctly', () => {
     //CLICK ON FORGOT PASSWORD
     cy.get('div a').click();
@@ -99,7 +101,7 @@ describe('geohub reset password', () => {
   });
 });
 
-describe('geohub log in', () => {
+describe('orchestrator: log in', () => {
   it('should log in succesfly with correct fields', () => {
     //EMAIL FIELD
     cy.get('div input[type="email"]').type(email);
@@ -109,10 +111,6 @@ describe('geohub log in', () => {
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', 'dashboards/main');
   });
-
-  //   it.skip('should display dashboards elements correctly', () => {
-  //     cy.get('header').should('exist');
-  //   });
 });
 
 after(() => {
