@@ -1,7 +1,8 @@
 import {Notification, apiNotifications, email, password} from 'cypress/utils/test-utils';
 
-let notifications: Notification[] = [];
+let notifications: Notification[] = []; //USED TO STORE NOTIFICATIONS RETRIEVED FROM THE API
 
+//COOKIES AND LOCAL STORAGE DELETED, AND HOMEPAGE VISITED BEFORE RUNNING TESTS
 before(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
@@ -74,6 +75,7 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
   });
 });
 
+//COOKIES AND LOCAL STORAGE DELETED AFTER RUNNING TESTS
 after(() => {
   cy.clearCookies();
   cy.clearLocalStorage();

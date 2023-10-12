@@ -1,9 +1,10 @@
 import {defineConfig} from 'cypress';
 
 export default defineConfig({
+  //GLOBAL CONFIGURATION FOR E2E TEST
   e2e: {
-    defaultCommandTimeout: 5000,
-    testIsolation: false,
-    baseUrl: 'https://orchestrator.maphub.it',
+    defaultCommandTimeout: 5000, //MAXIMUNG TIME IN MILISECONDS THAT WILL WAIT BEFORE THROWING AN ERROR
+    testIsolation: false, //TIPICALLY CYPRESS RESETS THE STATE BEFORE EACH TEST IN A CLEAN ENVIRONMENT, BY CONFIGURING IT TO FALSE WE DECIDE WHEN TO HAVE A CLEAN ENVIRONMENT DIRECTLY ON THE TESTS
+    baseUrl: 'https://orchestrator.maphub.it', //BASE URL YOU ARE TESTING, DURING DEVELOPMENT YOU CAN USE LOCALHOST
   },
 });

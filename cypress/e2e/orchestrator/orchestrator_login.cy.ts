@@ -5,7 +5,7 @@ import {
   password,
 } from 'cypress/utils/test-utils';
 
-beforeEach(() => {
+before(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
   cy.visit('/');
@@ -82,6 +82,8 @@ describe('orchestrator: login fields', () => {
 
 describe('orchestrator: reset password', () => {
   it('should display all reset password fields and style correctly', () => {
+    //VISIT HOMEPAGE
+    cy.visit('/');
     //CLICK ON FORGOT PASSWORD
     cy.get('div a').click();
     cy.url().should('include', orchestratorForgotPasswordUrl);
@@ -102,6 +104,8 @@ describe('orchestrator: reset password', () => {
 
 describe('orchestrator: log in', () => {
   it('should log in succesfly with correct fields', () => {
+    //VISIT HOMEPAGE
+    cy.visit('/');
     //EMAIL FIELD
     cy.get('div input[type="email"]').type(email);
     //PASSWORD FIELD
