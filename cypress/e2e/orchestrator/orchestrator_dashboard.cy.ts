@@ -52,7 +52,9 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
     cy.get('header div.relative button').click();
 
     if (notifications && notifications.length > 0) {
+      //VERIFY THE CORRECT NOTIFICATIONS TITLE
       cy.get('div.relative.divide-y nav h3').should('exist').and('include.text', 'Notifications');
+
       //VERIFY THE CORRECT NOTIFICATIONS MESSAGE
       notifications.forEach((notification, index) => {
         const message = notification.message;
