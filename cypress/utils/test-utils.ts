@@ -6,28 +6,27 @@ export const greenColorRgb: string = 'rgb(24, 182, 155)';
 export const apiNotifications: string =
   'https://orchestrator.maphub.it/nova-api/nova-notifications';
 
-export const mockedApiNotifications = {
-  notifications: [
-    {
-      id: '9a1d5a0e-6201-4c10-8392-d72a0d8dc333',
-      user_id: 104,
-      component: 'message-notification',
-      actionText: 'View Epic',
-      message: 'New Epic e2e_test has been assigned to you',
-    },
-    {
-      id: '9a1b8181-eea9-4933-96a5-c304d42f0729',
-      user_id: 104,
-      component: 'message-notification',
-      actionText: 'View Epic',
-      message: 'Your Epic revision_interfaces has been marked as done',
-    },
-    {
-      id: 'New Epic revision_interfaces has been assigned to you',
-      user_id: 104,
-      component: 'message-notification',
-      actionText: 'View Epic',
-      message: 'New Epic revision_interfaces has been assigned to you',
-    },
-  ],
-};
+export interface ActionUrl {
+  remote: boolean;
+  url: string;
+}
+
+export interface Notification {
+  actionText: string;
+  actionUrl: ActionUrl;
+  component: string;
+  created_at: string;
+  created_at_friendly: string;
+  icon: string;
+  iconClass: string;
+  id: string;
+  message: string;
+  openInNewTab: boolean | null;
+  read_at: string | null;
+  type: string;
+  user_id: number;
+}
+
+export interface NotificationsResponse {
+  notifications: Notification[];
+}

@@ -1,6 +1,12 @@
-import {apiNotifications, email, orchestratorUrl, password} from 'cypress/utils/test-utils';
+import {
+  Notification,
+  apiNotifications,
+  email,
+  orchestratorUrl,
+  password,
+} from 'cypress/utils/test-utils';
 
-let notifications: any[] = [];
+let notifications: Notification[] = [];
 
 before(() => {
   cy.clearCookies();
@@ -44,13 +50,30 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
   it('should display notifications correctly ', () => {
     //NOTIFICATIONS CLICK BUTTON
     cy.get('header div.relative button').click();
-    cy.get('div.relative.divide-y nav h3').should('exist').and('include.text', 'Notifications');
-    //VERIFY THE CORRECT NOTIFICATIONS MESSAGE
-    for (let i = 0; i < notifications.length; i++) {
-      const message = notifications[i].message;
-      cy.get(`div.relative.divide-y div:nth-child(${i + 1}) div div p`)
-        .should('exist')
-        .and('include.text', message);
+
+    if (notifications && notifications.length > 0) {
+      cy.get('div.relative.divide-y nav h3').should('exist').and('include.text', 'Notifications');
+      //VERIFY THE CORRECT NOTIFICATIONS MESSAGE
+      notifications.forEach((notification, index) => {
+        const message = notification.message;
+        cy.get(`div.relative.divide-y div:nth-child(${index + 1}) div div p`)
+          .should('exist')
+          .and('include.text', message);
+        cy.log(message);
+
+        //VERIFY THE CORRECT NOTIFICATIONS CREATION DATE
+        const createdAtFriendly = notification.created_at_friendly;
+        cy.get(
+          `div.relative.divide-y div:nth-child(${
+            index + 1
+          }) div div div.flex-auto div:nth-child(1) p`,
+        )
+          .should('exist')
+          .and('include.text', createdAtFriendly);
+        cy.log(createdAtFriendly);
+      });
+    } else {
+      cy.log('No notifications to display.');
     }
   });
 });
