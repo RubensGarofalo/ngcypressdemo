@@ -1,0 +1,91 @@
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  min-height: 100vh;
+
+  header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: fixed;
+    top: 10%;
+    margin-top: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+    .custom-link {
+      color: #a7a7a7;
+      text-decoration: none; /* Questo rimuove la sottolineatura. */
+      transition: color 0.3s ease; /* Questo aggiunge un'animazione morbida al cambiamento di colore. */
+    }
+
+    .custom-link:hover,
+    .custom-link:active {
+      color: red;
+    }
+  }
+
+  .features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 170px;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .feature {
+      flex: 1;
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      min-width: 250px;
+
+      h2 {
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      p {
+        margin-top: 15px;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  footer {
+    margin-top: 25%;
+    padding-top: 30px;
+    color: #7f8c8d;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
