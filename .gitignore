@@ -41,4 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Cypress
 cypress.env.json
+cypress/screenshots

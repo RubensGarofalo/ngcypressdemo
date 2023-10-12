@@ -1,17 +1,11 @@
-import {
-  Notification,
-  apiNotifications,
-  email,
-  orchestratorUrl,
-  password,
-} from 'cypress/utils/test-utils';
+import {Notification, apiNotifications, email, password} from 'cypress/utils/test-utils';
 
 let notifications: Notification[] = [];
 
 before(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
-  cy.visit(orchestratorUrl);
+  cy.visit('/');
 });
 
 describe('orchestrator: test the correct behaviour of dashboard', () => {

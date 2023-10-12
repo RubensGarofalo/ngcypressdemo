@@ -2,14 +2,13 @@ import {
   email,
   greenColorRgb,
   orchestratorForgotPasswordUrl,
-  orchestratorUrl,
   password,
 } from 'cypress/utils/test-utils';
 
 beforeEach(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
-  cy.visit(orchestratorUrl);
+  cy.visit('/');
 });
 
 describe('orchestrator: login fields', () => {
