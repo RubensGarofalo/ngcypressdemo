@@ -1,4 +1,4 @@
-import {Notification, apiNotifications, email, password} from 'cypress/utils/test-utils';
+import {Notification, apiNotifications, email, password} from 'cypress/fixtures/test-utils';
 
 let notifications: Notification[] = []; //USED TO STORE NOTIFICATIONS RETRIEVED FROM THE API
 
@@ -6,6 +6,8 @@ let notifications: Notification[] = []; //USED TO STORE NOTIFICATIONS RETRIEVED 
 before(() => {
   cy.clearCookies();
   cy.clearLocalStorage();
+  //INTERCEPTION OF API NOTIFICATIONS
+  cy.intercept('GET', apiNotifications).as('notificationsCall');
   cy.visit('/');
 });
 
@@ -17,8 +19,6 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
     cy.get('div input[type="password"]').type(password);
     //LOGIN BUTTON
     cy.get('div button[type="submit"]').click();
-    //INTERCEPTION OF API NOTIFICATIONS
-    cy.intercept('GET', apiNotifications).as('notificationsCall');
     cy.wait('@notificationsCall').then(resp => {
       notifications = resp.response?.body.notifications;
     });
@@ -42,7 +42,7 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
     cy.get('header button div span').should('exist').and('not.be.empty');
   });
 
-  it('should display notifications correctly ', () => {
+  it('should display notifications correctly', () => {
     //NOTIFICATIONS CLICK BUTTON
     cy.get('header div.relative button').click();
 

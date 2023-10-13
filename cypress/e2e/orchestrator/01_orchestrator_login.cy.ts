@@ -3,7 +3,7 @@ import {
   greenColorRgb,
   orchestratorForgotPasswordUrl,
   password,
-} from 'cypress/utils/test-utils';
+} from 'cypress/fixtures/test-utils';
 
 before(() => {
   cy.clearCookies();
