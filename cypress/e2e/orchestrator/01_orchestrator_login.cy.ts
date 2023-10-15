@@ -1,9 +1,4 @@
-import {
-  email,
-  greenColorRgb,
-  orchestratorForgotPasswordUrl,
-  password,
-} from 'cypress/fixtures/test-utils';
+import {email, greenColorRgb, password} from 'cypress/fixtures/test-utils';
 
 before(() => {
   cy.clearCookies();
@@ -31,7 +26,7 @@ describe('orchestrator: login fields', () => {
       .should('exist')
       .and('include.text', 'Forgot your password?')
       .and('have.attr', 'href')
-      .and('include', orchestratorForgotPasswordUrl);
+      .and('include', 'password/reset');
     //LOGIN BUTTON
     cy.get('div button[type="submit"]')
       .should('exist')
@@ -39,19 +34,20 @@ describe('orchestrator: login fields', () => {
       .and('have.css', 'background-color', greenColorRgb);
   });
 
+  //CHECK REQUIRED FIELDS
   it('should not log in without the required fields', () => {
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
   });
 
   it('should not log in with wrong email', () => {
-    cy.get('div input[type="email"]').type('wrongemail');
+    cy.get('div input[type="email"]').clear().type('wrongemail@wrongmail.com', {delay: 100});
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
   });
 
   it('should not log in with with password', () => {
-    cy.get('div input[type="password"]').type('wrongpassword');
+    cy.get('div input[type="password"]').clear().type('wrongpassword', {delay: 100});
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
   });
@@ -66,11 +62,11 @@ describe('orchestrator: login fields', () => {
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
 
-    cy.get('div input[type="email"]').type('wrongemail');
+    cy.get('div input[type="email"]').clear().type('wrongemail@wrongmail.com');
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
 
-    cy.get('div input[type="password"]').type('wrongpassword');
+    cy.get('div input[type="password"]').clear().type('wrongpassword');
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', '/login');
 
@@ -86,7 +82,7 @@ describe('orchestrator: reset password', () => {
     cy.visit('/');
     //CLICK ON FORGOT PASSWORD
     cy.get('div a').click();
-    cy.url().should('include', orchestratorForgotPasswordUrl);
+    cy.url().should('include', 'password/reset');
     //LOGO
     cy.get('span svg').should('exist');
     //TITLE
@@ -107,9 +103,9 @@ describe('orchestrator: log in', () => {
     //VISIT HOMEPAGE
     cy.visit('/');
     //EMAIL FIELD
-    cy.get('div input[type="email"]').type(email);
+    cy.get('div input[type="email"]').type(email, {delay: 100});
     //PASSWORD FIELD
-    cy.get('div input[type="password"]').type(password);
+    cy.get('div input[type="password"]').type(password, {delay: 100});
     //LOGIN BUTTON
     cy.get('div button[type="submit"]').click();
     cy.url().should('include', 'dashboards/main');
