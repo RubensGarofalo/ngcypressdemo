@@ -14,9 +14,9 @@ before(() => {
 describe('orchestrator: test the correct behaviour of dashboard', () => {
   it('should log in succesfly with correct fields', () => {
     //EMAIL FIELD
-    cy.get('div input[type="email"]').type(email);
+    cy.get('div input[type="email"]').type(email, {delay: 100});
     //PASSWORD FIELD
-    cy.get('div input[type="password"]').type(password);
+    cy.get('div input[type="password"]').type(password, {delay: 100});
     //LOGIN BUTTON
     cy.get('div button[type="submit"]').click();
     cy.wait('@notificationsCall').then(resp => {
@@ -43,6 +43,7 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
   });
 
   it('should display notifications correctly', () => {
+    cy.wait(3000);
     //NOTIFICATIONS CLICK BUTTON
     cy.get('header div.relative button').click();
 
@@ -73,10 +74,4 @@ describe('orchestrator: test the correct behaviour of dashboard', () => {
       cy.log('No notifications to display.');
     }
   });
-});
-
-//COOKIES AND LOCAL STORAGE DELETED AFTER RUNNING TESTS
-after(() => {
-  cy.clearCookies();
-  cy.clearLocalStorage();
 });

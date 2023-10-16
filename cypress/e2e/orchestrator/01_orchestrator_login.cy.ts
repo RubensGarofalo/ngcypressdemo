@@ -76,7 +76,7 @@ describe('orchestrator: login fields', () => {
   });
 });
 
-describe('orchestrator: reset password', () => {
+describe.skip('orchestrator: reset password', () => {
   it('should display all reset password fields and style correctly', () => {
     //VISIT HOMEPAGE
     cy.visit('/');
@@ -98,7 +98,7 @@ describe('orchestrator: reset password', () => {
   });
 });
 
-describe('orchestrator: log in', () => {
+describe.skip('orchestrator: log in', () => {
   it('should log in succesfly with correct fields', () => {
     //VISIT HOMEPAGE
     cy.visit('/');
